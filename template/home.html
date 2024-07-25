@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class</title>
+    <link rel="stylesheet" href="{% static  'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">Class</div>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'home'%}">Home</a></li>
+                    <li><a href="{% url 'class_list'%}">Classes</a></li>
+
+                    {%if user.is_authenticated%}
+                    <li><a href="{% url 'user_assignments' %}">Assignments</a></li>
+                    {% else %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li><a href="{% url 'signup' %}">signup</a></li>
+                    {%endif%}
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        {% if request.user.is_authenticated == False%}
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Welcome to Class</h1>
+                <p>Manage assignments and grades efficiently</p>
+                <a href="{% url 'signup'%}"><button class="btn">Get Started</button></a>
+            </div>
+        
+        </section>
+        {% endif %}
+        {% if request.user.is_authenticated%}
+        <section class="grades">
+            <div class="grades-content">
+                <div class="grades-image">
+                    <img src="{% static 'images/homework.jpg'%}" alt="Grades Image">
+                </div>
+                <div class="grades-list">
+                    <h2>Class List</h2>
+                    {% for item in classes %}
+                        <a href="{ item.name }" class="grade-item">
+                            <h3>{{ item.class_name }}</h3>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+        {% endif %}
+    </main>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Class</h3>
+                <p>Manage assignments and grades efficiently with Class.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Navigation</h3>
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'user_assignments' %}">Assignments</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Socials</h3>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Youtube</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+

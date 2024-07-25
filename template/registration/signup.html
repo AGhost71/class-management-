@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link rel="stylesheet" href="{% static  'css/signup.css' %}">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">Class</div>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'home'%}">Home</a></li>
+                    <li><a href="{% url 'class_list'%}">Classes</a></li>
+
+                    {%if user.is_authenticated%}
+                    <li><a href="{% url 'user_assignments' %}">Assignments</a></li>
+                    {% else %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li><a href="{% url 'signup' %}">signup</a></li>
+                    {%endif%}
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="signup">
+            <div class="signup-form">
+                <h2>Signup</h2>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% if form.errors %}
+                    <div class="errors">
+                        <ul>
+                        {% for field in form %}
+                            {% if field.errors %}
+                            <li>
+                                <strong>{{ field.label }}:</strong>
+                                {% for error in field.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </li>
+                            {% endif %}
+                        {% endfor %}
+                        {% if form.non_field_errors %}
+                            <li>
+                            <strong>General errors:</strong>
+                            {% for error in form.non_field_errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                            </li>
+                        {% endif %}
+                        </ul>
+                    </div>
+                    {% endif %}
+                    <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="PhoneNumber">Phone Number:</label>
+                        <input type="text" id="PhoneNumber" name="PhoneNumber" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Picture">Profile Picture:</label>
+                        <input type="file" id="Picture" name="Picture" accept="image/*" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password1" name="password1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmpassword">Confirm Password:</label>
+                        <input type="password" id="password2" name="password2" required>
+                    </div>
+                    <button type="submit" class="btn">Signup</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Class</h3>
+                <p>Manage assignments and grades efficiently with Class.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Navigation</h3>
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'user_assignments' %}">Assignments</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Socials</h3>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Youtube</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

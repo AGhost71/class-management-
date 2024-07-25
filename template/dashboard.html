@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static%}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">Class</div>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'home'%}">Home</a></li>
+                    <li><a href="{% url 'class_list'%}">Classes</a></li>
+
+                    {%if user.is_authenticated%}
+                    <li><a href="{% url 'user_assignments' %}">Assignments</a></li>
+                    {% else %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li><a href="{% url 'signup' %}">signup</a></li>
+                    {%endif%}
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="dashboard">
+            <div class="user-info">
+                <img src="{{ user.Picture.url }}" alt="Profile Picture" class="profile-picture">
+                <div class="user-details">
+                    <h2>{{request.user.username}}</h2>
+                    <p>Email: {{request.user.email}}</p>
+                    <p>Phone: {{request.user.PhoneNumber}}</p>
+                    <a href="profile-edit"><button class="btn-edit">Edit Profile</button></a>
+                </div>
+            </div>
+            <div class="section classes">
+                <h3>Your Classes</h3>
+                <ul>
+                    {% for item in classes%}
+                    <li><a href="{{item.get_absolute_url}} ">{{item.class_name}}</a></li>
+                    {%endfor%}
+                </ul>
+            </div>
+            <div class="section assignments">
+                <h3>Your Assignments</h3>
+                <ul>
+                    {% for item in assignments%}
+                    <li><a href="{{ item.get_absolute_url }}"> {{item.title}}</a></li>
+                    {%endfor%}
+                </ul>
+            </div>
+            <div class="section submissions">
+                <h3>Your Submissions</h3>
+                <ul>
+                    {% if user.is_student %}
+                        {% for submission in submissions%}
+                        <li>{{ submission.assignment }}
+                            Grade: {% if submission.grade %}{{ submission.grade }}{% else %}Not graded{% endif %}
+                        </li>
+                        {% endfor %}
+                    {% elif user.is_teacher %}
+                    {% for submission in submissions%}
+                        <li><a href= "{% url 'update_grade' submission.id %}">{{ submission.assignment }}</a>
+                        </li>
+                    {%endfor%}
+                    {% endif %}
+                </ul>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Class</h3>
+                <p>Manage assignments and grades efficiently with Class.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Navigation</h3>
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'user_assignments' %}">Assignments</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Socials</h3>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Youtube</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

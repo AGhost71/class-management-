@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment Details</title>
+    <link rel="stylesheet" href="{%static 'css/assignment_detail.css' %}">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">Class</div>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'home'%}">Home</a></li>
+                    <li><a href="{% url 'class_list'%}">Classes</a></li>
+
+                    {%if user.is_authenticated%}
+                    <li><a href="{% url 'user_assignments' %}">Assignments</a></li>
+                    {% else %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li><a href="{% url 'signup' %}">signup</a></li>
+                    {%endif%}
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="assignment-details">
+            <h2>Assignment Details</h2>
+            <div class="details-container">
+                <p><strong>Class Name:</strong> {{assignment.Class_room.class_name}}</p>
+                <p><strong>Teacher Name:</strong> {{ assignment.Class_room.classteacher.user }} </p>
+                <p><strong>Upload Date:</strong> {{ assignment.UploadDate }}</p>
+                <p><strong>Description:</strong> {{ assignment.Description }}</p>
+                <p><strong>Assignment File:</strong> <a href="{{ assignment.File.url }}" download>Download Assignment File</a></p>
+                <a href="{% url 'create_submission' assignment.id%}" class="btn">Create Submission</a>
+            </div>
+
+        </section>
+    </main>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Class</h3>
+                <p>Manage assignments and grades efficiently with Class.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Navigation</h3>
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'user_assignments' %}">Assignments</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Socials</h3>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Youtube</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

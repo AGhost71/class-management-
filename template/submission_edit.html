@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Submission Grade</title>
+    <link rel="stylesheet" href="{% static 'css/submission_edit.css'%}">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">Class</div>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'home'%}">Home</a></li>
+                    <li><a href="{% url 'class_list'%}">Classes</a></li>
+
+                    {%if user.is_authenticated%}
+                    <li><a href="{% url 'user_assignments' %}">Assignments</a></li>
+                    {% else %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li><a href="{% url 'signup' %}">signup</a></li>
+                    {%endif%}
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="update-grade">
+            <h2>Update Submission Grade</h2>
+            <div class="form-container">
+                <form  method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="student-name">Student Name: {{submission.student.user}}</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="assignment-title">Assignment Title: {{submission.assignment}}</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="submission-file">Submission File:</label>
+                        <a href="{{submission.File.url}}" download class="download-link">Download Submission</a>
+                    </div>
+                    <div class="form-group">
+                        <label for="grade">Grade:</label>
+                        <input type="text" id="grade" name="grade" required>
+                    </div>
+                    <button type="submit" class="btn">Submit Grade</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Class</h3>
+                <p>Manage assignments and grades efficiently with Class.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Navigation</h3>
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'user_assignments' %}">Assignments</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Socials</h3>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Youtube</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

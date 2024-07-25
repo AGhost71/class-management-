@@ -1,0 +1,151 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: white;
+    background-color: #121212;
+}
+
+header {
+    background-color: #000;
+    padding: 10px 20px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar .logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.navbar nav ul {
+    list-style: none;
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar nav ul li {
+    margin: 0 10px;
+}
+
+.navbar nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.hero {
+    background: url('your-hero-image.jpg') no-repeat center center/cover;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+.hero-content {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.hero .btn {
+    background-color: orange;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 18px;
+    color: white;
+    border-radius: 5px;
+}
+
+section {
+    padding: 20px;
+}
+
+.assignments, .grades {
+    display: flex;
+    flex-direction: column;
+    background-color: #1e1e1e;
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.assignments-content, .grades-content {
+    display: flex;
+}
+
+.assignments-image, .grades-image {
+    flex: 1;
+    padding-right: 20px;
+}
+
+.assignments-image img, .grades-image img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.assignments-list, .grades-list {
+    flex: 1;
+}
+
+.assignments-list h2, .grades-list h2 {
+    margin-bottom: 20px;
+    border-bottom: none;
+}
+
+.assignment-item, .grade-item {
+    display: block;
+    background: #2e2e2e;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    margin-bottom: 10px;
+    text-decoration: none;
+    color: white;
+}
+
+.assignment-item:hover, .grade-item:hover {
+    background: #3e3e3e;
+}
+
+footer {
+    background-color: #000;
+    padding: 20px;
+    text-align: center;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-section {
+    width: 30%;
+}
+
+.footer-section h3 {
+    border-bottom: 2px solid orange;
+    padding-bottom: 10px;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin: 10px 0;
+}
+
+.footer-section ul li a {
+    color: white;
+    text-decoration: none;
+}
